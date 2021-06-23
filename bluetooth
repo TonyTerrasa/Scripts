@@ -1,0 +1,39 @@
+#!/bin/bash
+
+
+# used to more easily connect to my bluetooth headphones
+
+# determine which device I am looking for (first argument)
+case $1 in
+
+    "bose")
+    DEVICE="60:AB:D2:8F:A6:17"
+    ;;
+    *)
+    # notify that we couldn't find a device
+    notify-send "no bluetooth option for '${1}'"
+    ;;
+    
+esac
+
+case $2 in 
+
+    "-c")
+    COMMAND="connect"
+    ;;
+
+    "-d")
+    COMMAND="disconnect"
+    ;;
+
+    *)
+    # default to connect
+    COMMAND="connect"
+    ;;
+esac
+
+# execute the command
+echo "${COMMAND} ${DEVICE}" | bluetoothctl 
+
+
+

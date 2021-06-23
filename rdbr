@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# kill all redshift processes
+killall -q redshift
+
+echo "brightness level set to: $1"
+
+# set brightness to the value given
+redshift -b $1 &

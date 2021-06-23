@@ -1,0 +1,39 @@
+#!/bin/bash
+
+
+# todo : figure out how to get the pattern of the files in a directory and 
+# use that in the new name
+
+# --------------------------------------------------------------
+# ensure the user wants to delete the file
+# --------------------------------------------------------------
+echo "Doing this will delete your previously combined file"
+echo "would you liketo proceed (y/n)"
+read answer
+
+if [ "$answer" == "n" ]
+    then 
+    echo "okay, stopping then"
+    exit
+fi
+# --------------------------------------------------------------
+
+# go to the given directory
+cd $1
+
+# gets all of the pdfs without "combined"
+files_to_comb=$(ls *pdf | grep -v "combined")
+
+# make sure there is a combined file before removing it
+if [[ -f "*combined*.pdf" ]]; then
+    # get rid of the current combined file
+    trash-put *combined*.pdf
+fi
+
+# run the pdfunite
+pdfunite $files_to_comb notes_combined.pdf
+
+
+echo "All done!"
+
+

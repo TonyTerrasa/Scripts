@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# turn off the bluetooth so that it does not interfere
+echo "power off" | bluetoothctl
+
+# lock the screen
+# -e ignores empty password
+i3lock -e -c 000000
+
